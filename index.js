@@ -1,3 +1,4 @@
+//SISTEMA DE CARTAS BLACK JACK - DECK DE 53 CARTAS
 const SUITS = ['Clubs','Diamonds','Hearts','Spades'];
 const CARDS = [[],[],[],[]]
 const numRandom = (max,min) => Math.floor(Math.random()*(max - min + 1)) + min
@@ -8,18 +9,8 @@ const getACard = () => {
         let secondNum = [numRandom(12,0)];
 
         if(CARDS[firstNum][secondNum]){
-            let CardString = `
---------------
-|            | 
-|   ${CARDS[firstNum][secondNum].suit}      
-|            |
-|   ${CARDS[firstNum][secondNum].getPip}      
-|            |
-|            |                                                
-|            |
---------------`;
             CARDS[firstNum].splice(CARDS[firstNum].indexOf(CARDS[firstNum][secondNum]),1)[0];
-            return CardString; 
+            return CARDS[firstNum][secondNum]; 
         }
         if(CARDS[0].length==0 && CARDS[1].length == 0 && CARDS[2].length == 0 &&CARDS[3].length == 0){
             break;
@@ -55,13 +46,9 @@ SUITS.forEach((value,index) => {
     }
 })
 
-
-
+// ahora toca el juego
+console.log(getACard().suit);
 console.log(CARDS)
-
-console.log(CARDS[0].length,CARDS[1].length,CARDS[2].length,CARDS[3].length)
-
-
 
 
 
