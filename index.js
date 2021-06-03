@@ -1,12 +1,8 @@
 //SISTEMA DE CARTAS BLACK JACK - DECK DE 53 CARTAS
 const SUITS = ['Clubs','Diamonds','Hearts','Spades'];
 const CARDS = [[],[],[],[]]
-
-
-
 const numRandom = (max,min) => Math.floor(Math.random()*(max - min + 1)) + min
 const getACard = () => {
-
     while(CARDS[0].length!==0 && CARDS[1].length !== 0 && CARDS[2].length !== 0 &&CARDS[3].length !== 0){    
         let firstNum = [numRandom(3,0)];
         let secondNum = [numRandom(12,0)];
