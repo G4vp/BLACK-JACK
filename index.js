@@ -1,6 +1,9 @@
 //SISTEMA DE CARTAS BLACK JACK - DECK DE 53 CARTAS
 const SUITS = ['Clubs','Diamonds','Hearts','Spades'];
 const CARDS = [[],[],[],[]]
+
+
+
 const numRandom = (max,min) => Math.floor(Math.random()*(max - min + 1)) + min
 const getACard = () => {
 
@@ -40,6 +43,7 @@ const verified = (x,y,userStop,dealerStop)=>{
     }
     else if(cardCounter(x) == 21 && cardCounter(y) != 21){
         return('BLACK JACK');
+        
     }
     else if(cardCounter(x) > 21){
         return('You passed 21');
