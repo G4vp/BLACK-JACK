@@ -117,14 +117,16 @@ while(total){
     usercards[1].push(usercard2.suit);usercards[1].push(usercard2.getPip);
     
     //VERIFICAR ESTA SHIT
-    alert(`${dealercards} ${cardCounter(dealercards)}
+    alert(`
+    ${dealercards} ${cardCounter(dealercards)}
     
     ${usercards} ${cardCounter(usercards)}
     `)
     alert(verified(usercards,dealercards,true,true))
 
-        //GABRIEL DEL FUTURO PUEDES CHEQUEARTE QUITAR ESTE FOR Y LUEGO CUANDO VAYAS A PEDIR SI SEA UN BUCLE AL IGUAL QUE EL DEALER
-        //OTRA COSA, CHEQUEATE SI ES POSIBLE HACER TODA ESTA MIERDA EN UNA FUCNON PA NO ESTAR REPITIENDO EL MISMO CODE SIEMRPRE
+    if(verified(usercards,dealercards,true,true) == 'BLACK JACK' || verified(usercards,dealercards,true,true) == 'You passed the dealer'){
+        total += (bet+bet+bet)
+    }
     
     console.log(dealercards)
     if(bet == 99){
