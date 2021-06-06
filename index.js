@@ -170,7 +170,7 @@ while(total){
         [DEALER CARD'S VALUE: ${cardCounter(dealercards)}]
         
         ${usercards.join(' | ')}        
-        [USERCARD'S VALUE: ${cardCounter(usercards)}]
+        [USER CARD'S VALUE: ${cardCounter(usercards)}]
         `);
     alert(verified(usercards,dealercards))
     if(verified(usercards,dealercards) == '21 - YOU WIN' || verified(usercards,dealercards) == 'You passed the dealer - YOU WIN' || verified(usercards,dealercards) == 'The dealer passed 21 - YOU WIN' || verified(usercards,dealercards) == 'BLACK JACK - YOU WIN'){
