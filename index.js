@@ -6,12 +6,9 @@ const getACard = () => {
     while(CARDS[0].length!==0 && CARDS[1].length !== 0 && CARDS[2].length !== 0 &&CARDS[3].length !== 0){    
         let firstNum = [numRandom(3,0)];
         let secondNum = [numRandom(12,0)];
-
         if(CARDS[firstNum][secondNum]){
             return CARDS[firstNum].splice(CARDS[firstNum].indexOf(CARDS[firstNum][secondNum]),1)[0];
-            
         }
-        
     }
 }
 const cardCounter = (a) => {
@@ -32,29 +29,27 @@ const cardCounter = (a) => {
     })
     return total
 }
-const verified = (x,y,userStop,dealerStop)=>{
-
+const verified = (x,y)=>{
     if(cardCounter(x) == 21 && cardCounter(y) == 21){
         return('Draw');
     }
     else if(cardCounter(x) == 21 && cardCounter(y) != 21){
-        return('BLACK JACK');
-        
+        return('BLACK JACK - YOU WIN');
     }
     else if(cardCounter(x) > 21){
-        return('You passed 21');
+        return('You passed 21 - YOU LOSE ');
     }
     else if(cardCounter(y) == 21 && cardCounter(x) != 21){
-        return('BLACK JACK for the dealer');
+        return('BLACK JACK for the dealer - YOU LOSE');
     }
     else if(cardCounter(y) > 21){
-        return('The dealer passed 21')
+        return('The dealer passed 21 - YOU WIN')
     }
-    else if(userStop && cardCounter(y) > cardCounter(x)){
-        return('The dealer passed you');
+    else if(cardCounter(y) > cardCounter(x)){
+        return('The dealer passed you - YOU LOSE');
     }
-    else if(dealerStop && cardCounter(y) < cardCounter(x)){
-        return('You passed the dealer');
+    else if(cardCounter(y) < cardCounter(x)){
+        return('You passed the dealer - YOU WIN' );
     }
 }
 class Card{
@@ -85,7 +80,6 @@ SUITS.forEach((value,index) => {
         CARDS[index].push(newCard);
     }
 })
-
 // ahora toca el juego
 let Start = '';
 while(!(Start.toLowerCase() === 'yes' || Start.toLowerCase() === 'y')){
@@ -94,13 +88,18 @@ while(!(Start.toLowerCase() === 'yes' || Start.toLowerCase() === 'y')){
     [Yes] [No]
     `);
 }
-let total = 1000;
+let total = 100;
 
 while(total){
-    let bet = Number(prompt(
-        `You have a total of ${total} in the bank.
+    let bet;
+    do{bet = Number(prompt(
+        `You have a total of $ ${total} in the bank.
         
         Amount for bet: `));
+        if(bet > 1000){
+            alert('You dont have enought money')
+        }
+    }while(bet > 1000)
     total -= bet;
     
     const dealercards = [];
@@ -117,20 +116,59 @@ while(total){
     usercards[1].push(usercard2.suit);usercards[1].push(usercard2.getPip);
     
     //VERIFICAR ESTA SHIT
-    alert(`
-    ${dealercards} ${cardCounter(dealercards)}
     
-    ${usercards} ${cardCounter(usercards)}
-    `)
-    alert(verified(usercards,dealercards,true,true))
-
-    if(verified(usercards,dealercards,true,true) == 'BLACK JACK' || verified(usercards,dealercards,true,true) == 'You passed the dealer'){
-        total += (bet+bet+bet)
+    if(cardCounter(usercards) !== 21){
+        let continuar = '';
+        let indexcard = 2
+        do{ 
+            continuar = prompt(`
+            ${dealercards} ${cardCounter(dealercards)}
+            
+            ${usercards} ${cardCounter(usercards)}
+            
+            Want another card?
+            [Yes] [No]
+            `)
+            if(continuar === 'y'){
+                let usercardRandom = getACard();
+                usercards[indexcard] = [];
+                usercards[indexcard].push(usercardRandom.suit);
+                usercards[indexcard].push(usercardRandom.getPip);
+                indexcard++;
+            }
+            if(cardCounter(usercards) >= 21){
+                break
+            }
+        }while(continuar === 'y');
     }
+    let indexDealer = 1; 
+    do{
+        let dealercardRan = getACard();
+        dealercards[indexDealer] = [];
+        dealercards[indexDealer].push(dealercardRan.suit);
+        dealercards[indexDealer].push(dealercardRan.getPip);
+        indexDealer++
+        alert(`
+        ${dealercards} ${cardCounter(dealercards)}
+        
+        ${usercards} ${cardCounter(usercards)}
+        
+        `)
+    }while(cardCounter(dealercards) < 16)
+
+    alert(`
+        Finals results:
+        ${dealercards} ${cardCounter(dealercards)}
+        
+        ${usercards} ${cardCounter(usercards)}
+        
+        `);
     
-    console.log(dealercards)
-    if(bet == 99){
-        break;
+    alert(verified(usercards,dealercards))
+    
+
+    if(verified(usercards,dealercards) == 'BLACK JACK' || verified(usercards,dealercards) == 'You passed the dealer'){
+        total += (bet+bet+bet)
     }
 }
     
