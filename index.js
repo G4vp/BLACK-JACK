@@ -30,7 +30,7 @@ const cardCounter = (a) => {
     return total
 }
 const verified = (x,y)=>{
-    if(cardCounter(x) == 21 && cardCounter(y) == 21){
+    if(cardCounter(x) === cardCounter(y)){
         return('Draw');
     }
     else if(cardCounter(x) == 21 && cardCounter(y) != 21){
@@ -129,7 +129,7 @@ while(total){
             Want another card?
             [Yes] [No]
             `)
-            if(continuar === 'y'){
+            if(continuar.toLowerCase() === 'y' || continuar.toLowerCase() ==='yes'){
                 let usercardRandom = getACard();
                 usercards[indexcard] = [];
                 usercards[indexcard].push(usercardRandom.suit);
@@ -139,7 +139,7 @@ while(total){
             if(cardCounter(usercards) >= 21){
                 break
             }
-        }while(continuar === 'y');
+        }while(continuar.toLowerCase() === 'y' || continuar.toLowerCase() ==='yes');
     }
     let indexDealer = 1; 
     do{
@@ -167,7 +167,7 @@ while(total){
     alert(verified(usercards,dealercards))
     
 
-    if(verified(usercards,dealercards) == 'BLACK JACK' || verified(usercards,dealercards) == 'You passed the dealer'){
+    if(verified(usercards,dealercards) == 'BLACK JACK - YOU WIN' || verified(usercards,dealercards) == 'You passed the dealer - YOU WIN' || verified(usercards,dealercards) == 'The dealer passed 21 - YOU WIN'){
         total += (bet+bet+bet)
     }
 }
