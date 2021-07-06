@@ -176,9 +176,10 @@ while(total){
     if(verified(usercards,dealercards) == '21 - YOU WIN' || verified(usercards,dealercards) == 'You passed the dealer - YOU WIN' || verified(usercards,dealercards) == 'The dealer passed 21 - YOU WIN' || verified(usercards,dealercards) == 'BLACK JACK - YOU WIN'){
         total += (bet+bet)
     }
-    else if(verified(usercards,dealercards) === 'DRAW'){
+    else if(verified(usercards,dealercards) === 'Draw'){
         total += bet
     }
+    else if(total <= 0)alert('GAME OVER')
 }
     
 
