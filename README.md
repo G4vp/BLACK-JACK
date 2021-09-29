@@ -1,4 +1,4 @@
 # BLACK-JACK
 
-This mini proyect is just a Black-Game made full in Javascript.
+This mini project is just a Black-Game made complete in Javascript.
 Play using the prompt and the alerts of the web browser.
